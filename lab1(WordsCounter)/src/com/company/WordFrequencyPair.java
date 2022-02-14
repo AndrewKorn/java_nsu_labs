@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class WordFrequencyPair implements Comparable<WordFrequencyPair> {
     private int frequency;
-    private String word;
+    private final String word;
 
     public WordFrequencyPair(String word) {
         this.word = word;
