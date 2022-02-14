@@ -52,7 +52,7 @@ public class WordsCounter {
         }
     }
 
-    public void readFile() {
+    private void readFile() {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(this.inputFile));
@@ -76,9 +76,7 @@ public class WordsCounter {
         }
     }
 
-    public void writeFile() {
-        List<WordFrequencyPair> list = new ArrayList<>(set);
-        Collections.sort(list);
+    private void writeFile(List<WordFrequencyPair> list) {
         try {
             FileWriter writer = new FileWriter(this.outputFile, false);
             for (WordFrequencyPair pair : list) {
@@ -93,6 +91,13 @@ public class WordsCounter {
         catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
+    }
+
+    public void parseFile() {
+        readFile();
+        List<WordFrequencyPair> list = new ArrayList<>(set);
+        Collections.sort(list);
+        writeFile(list);
     }
 }
 
