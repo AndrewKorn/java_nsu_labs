@@ -1,3 +1,4 @@
-asd qwe asd qwe
-asd qwe asd qwe
-asd qwe asd qweasd
+hello world
+my name is andrew and i am is nsu cs student
+now i am doing my java lab and i am very tired
+by world

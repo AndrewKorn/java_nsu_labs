@@ -16,15 +16,14 @@ public class WordsCounter {
 
     private void addWord(String word) {
         WordFrequencyPair pair = new WordFrequencyPair(word);
-        boolean exist = false;
-        for (WordFrequencyPair element : set) {
-            if (element.getWord().hashCode() == pair.hashCode()) {
-                element.setFrequency(element.getFrequency() + 1);
-                exist = true;
-                break;
+        if (set.contains(pair)) {
+            for (WordFrequencyPair element : set) {
+                if (element.getWord().equals(pair.getWord())) {
+                    element.setFrequency(element.getFrequency() + 1);
+                }
             }
         }
-        if (!exist) {
+        else {
             set.add(pair);
         }
         ++wordsCount;

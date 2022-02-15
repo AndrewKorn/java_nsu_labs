@@ -31,8 +31,8 @@ public class WordFrequencyPair implements Comparable<WordFrequencyPair> {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        WordFrequencyPair wordFreq = (WordFrequencyPair) object;
-        return ((frequency == wordFreq.frequency) && (Objects.equals(word, wordFreq.word)));
+        WordFrequencyPair pair = (WordFrequencyPair) object;
+        return (Objects.equals(word, pair.word));
     }
 
     @Override
