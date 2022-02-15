@@ -20,6 +20,7 @@ public class WordsCounter {
             for (WordFrequencyPair element : set) {
                 if (element.getWord().equals(pair.getWord())) {
                     element.setFrequency(element.getFrequency() + 1);
+                    break;
                 }
             }
         }
