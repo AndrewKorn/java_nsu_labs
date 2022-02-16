@@ -2,25 +2,25 @@ package com.company;
 
 import java.util.Objects;
 
-public class WordFrequencyPair implements Comparable<WordFrequencyPair> {
-    private int frequency;
+public class WordCountPair implements Comparable<WordCountPair> {
+    private int count;
     private final String word;
 
-    public WordFrequencyPair(String word) {
+    public WordCountPair(String word) {
         this.word = word;
-        this.frequency = 1;
+        this.count = 1;
     }
 
-    public int getFrequency() {
-        return frequency;
+    public int getCount() {
+        return count;
     }
 
     public String getWord() {
         return word;
     }
 
-    public void  setFrequency(int frequency) {
-        this.frequency = frequency;
+    public void  setCount(int frequency) {
+        this.count = frequency;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class WordFrequencyPair implements Comparable<WordFrequencyPair> {
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        WordFrequencyPair pair = (WordFrequencyPair) object;
+        WordCountPair pair = (WordCountPair) object;
         return (Objects.equals(word, pair.word));
     }
 
@@ -45,7 +45,7 @@ public class WordFrequencyPair implements Comparable<WordFrequencyPair> {
     }
 
     @Override
-    public int compareTo(WordFrequencyPair pair) {
-        return pair.getFrequency() - this.getFrequency();
+    public int compareTo(WordCountPair pair) {
+        return pair.getCount() - this.getCount();
     }
 }
