@@ -5,3 +5,4 @@ public class Main {
         WordsCounter.collectAndDisplayStatistics(args[0], args[1]);
     }
 }
+

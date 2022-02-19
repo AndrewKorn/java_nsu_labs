@@ -32,7 +32,7 @@ public class WordCountPair implements Comparable<WordCountPair> {
             return false;
         }
         WordCountPair pair = (WordCountPair) object;
-        return (Objects.equals(word, pair.word));
+        return (Objects.equals(word, pair.getWord()));
     }
 
     @Override
@@ -46,6 +46,11 @@ public class WordCountPair implements Comparable<WordCountPair> {
 
     @Override
     public int compareTo(WordCountPair pair) {
-        return pair.getCount() - this.getCount();
+        if (!word.equals(pair.getWord())) {
+            return pair.getCount() - this.getCount();
+        }
+        else {
+            return 0;
+        }
     }
 }
