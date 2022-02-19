@@ -34,14 +34,14 @@ public class FileReaderWriter {
 
     public static List<String> readFile(String inputFile) {
         BufferedReader reader = null;
-        List<String> list = new ArrayList<>();
+        List<String> listOfWords = new ArrayList<>();
         try {
             reader = new BufferedReader(new FileReader(inputFile));
             while (reader.ready()) {
                 String line = reader.readLine();
-                list.addAll(divideString(line));
+                listOfWords.addAll(divideString(line));
             }
-            return list;
+            return listOfWords;
         }
         catch (IOException e) {
             System.err.println("Error while reading file: " + e.getLocalizedMessage());
@@ -56,7 +56,7 @@ public class FileReaderWriter {
                 }
             }
         }
-        return list;
+        return listOfWords;
     }
 
     public static void writeCSVFile(String outputFile, List<WordCountPair> list, int wordsCount) {
