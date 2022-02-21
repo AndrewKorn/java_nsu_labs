@@ -46,7 +46,10 @@ public class WordCountPair implements Comparable<WordCountPair> {
 
     @Override
     public int compareTo(WordCountPair pair) {
-        if (!word.equals(pair.getWord())) {
+        if (pair == null) {
+            throw new NullPointerException("no acceptable null value");
+        }
+        if (word.equals(pair.getWord())) {
             return pair.getCount() - this.getCount();
         }
         else {

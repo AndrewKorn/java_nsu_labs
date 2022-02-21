@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderWriter {
-    public static List<String> divideString(String line) {
+    private static List<String> splitLineIntoWords(String line) {
         int beginIdx = 0;
         int wordLen = 0;
         List<String> list = new ArrayList<>();
@@ -39,7 +39,7 @@ public class FileReaderWriter {
             reader = new BufferedReader(new FileReader(inputFile));
             while (reader.ready()) {
                 String line = reader.readLine();
-                listOfWords.addAll(divideString(line));
+                listOfWords.addAll(splitLineIntoWords(line));
             }
             return listOfWords;
         }
