@@ -49,7 +49,7 @@ public class WordCountPair implements Comparable<WordCountPair> {
         if (pair == null) {
             throw new NullPointerException("no acceptable null value");
         }
-        if (word.equals(pair.getWord())) {
+        if (!word.equals(pair.getWord())) {
             return pair.getCount() - this.getCount();
         }
         else {
