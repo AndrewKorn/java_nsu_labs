@@ -63,13 +63,16 @@ public class FileReaderWriter {
         FileWriter writer = null;
         try {
             writer = new FileWriter(outputFile, false);
+            StringBuilder sb = new StringBuilder();
             for (WordCountPair pair : list) {
-                writer.write(
-                        pair.getWord() + ';'
-                                + pair.getCount() + ';'
-                                + (double)pair.getCount() / wordsCount * 100 + '\n'
-                );
+                sb.append(pair.getWord());
+                sb.append(";");
+                sb.append(pair.getCount());
+                sb.append(";");
+                sb.append((double)pair.getCount() / wordsCount * 100);
+                sb.append("\n");
             }
+            writer.write(sb.toString());
             writer.flush();
         }
         catch (IOException exception) {
