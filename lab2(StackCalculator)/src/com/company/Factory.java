@@ -1,44 +1,47 @@
 package com.company;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 
 public class Factory {
-    public static void getInstance(String file) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        new Factory(file);
+    public static void getInstance(String file, Map<String, Operation> config) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        new Factory(file, config);
     }
 
-    private Map<String, Operation> getConfiguration() throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Map<String, Operation> configuration = new HashMap<>();
-        InputStream in = Factory.class.getResourceAsStream("operations.properties");
-        Properties properties = new Properties();
-        properties.load(in);
-        for (String key : properties.stringPropertyNames()) {
-            String className = properties.getProperty(key);
-            Operation operation = (Operation)Class.forName(className).getDeclaredConstructor().newInstance();
-            configuration.put(key, operation);
-        }
-        return configuration;
+    public static void getInstance(Map<String, Operation> config) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+        new Factory(config);
     }
 
-    private Factory(String file) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException, NoSuchMethodException, InvocationTargetException {
-        Map<String, Operation> configuration = getConfiguration();
-
-        List<String> listOfLines = new FileParser(file).parse();
+    private Factory(String file, Map<String, Operation> config) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException, NoSuchMethodException, InvocationTargetException {
         ExecutionContext executionContext = new ExecutionContext();
+        List<String> listOfLines = new FileParser(file).parse();
+
         for (String line : listOfLines) {
             if (line.charAt(0) == '#') {
                 continue;
             }
             String[] args = line.split(" ");
-            Operation operation = configuration.get(args[0]);
+            Operation operation = config.get(args[0]);
             operation.execute(args, executionContext);
+        }
+
+    }
+
+    Factory(Map<String, Operation> config) throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException, NoSuchMethodException, InvocationTargetException {
+        ExecutionContext executionContext = new ExecutionContext();
+
+        Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
+        while (line.length() != 0) {
+            if (line.charAt(0) == '#') {
+                continue;
+            }
+            String[] args = line.split(" ");
+            Operation operation = config.get(args[0]);
+            operation.execute(args, executionContext);
+            line = scanner.nextLine();
         }
     }
 }
