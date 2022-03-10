@@ -21,12 +21,16 @@ public class Factory {
                 continue;
             }
             String[] args = line.split(" ");
-            if (!config.containsKey(args[0])) {
-                throw new CalculatorException("Unrecognized operation '" + args[0] + "'");
-            }
-            Operation operation = config.get(args[0]);
             try {
-                operation.execute(args, executionContext);
+                if (!config.containsKey(args[0])) {
+                    throw new CalculatorException("Unrecognized operation '" + args[0] + "'");
+                }
+                Operation operation = config.get(args[0]);
+                try {
+                    operation.execute(args, executionContext);
+                } catch (CalculatorException calculatorException) {
+                    calculatorException.printStackTrace();
+                }
             }
             catch (CalculatorException calculatorException) {
                 calculatorException.printStackTrace();
@@ -45,17 +49,21 @@ public class Factory {
                 continue;
             }
             String[] args = line.split(" ");
-            if (!config.containsKey(args[0])) {
-                throw new CalculatorException("Unrecognized operation '" + args[0] + "'");
-            }
-            Operation operation = config.get(args[0]);
             try {
-                operation.execute(args, executionContext);
+                if (!config.containsKey(args[0])) {
+                    throw new CalculatorException("Unrecognized operation '" + args[0] + "'");
+                }
+                Operation operation = config.get(args[0]);
+                try {
+                    operation.execute(args, executionContext);
+                } catch (CalculatorException calculatorException) {
+                    calculatorException.printStackTrace();
+                }
+                line = scanner.nextLine();
             }
             catch (CalculatorException calculatorException) {
                 calculatorException.printStackTrace();
             }
-            line = scanner.nextLine();
         }
     }
 }
