@@ -1,4 +1,5 @@
 import com.company.*;
+import com.company.Exceptions.CalculatorException;
 import org.testng.annotations.Test;
 
 import java.io.IOException;

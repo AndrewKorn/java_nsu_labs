@@ -1,6 +1,8 @@
 package com.company.Operations;
 
-import com.company.CalculatorException;
+import com.company.Exceptions.CalculatorException;
+import com.company.Exceptions.InvalidNumberOfArguments;
+import com.company.Exceptions.NotEnoughElementInStack;
 import com.company.ExecutionContext;
 import com.company.Operation;
 
@@ -8,10 +10,10 @@ public class SubOperation implements Operation {
     @Override
     public void execute(String[] args, ExecutionContext executionContext) throws CalculatorException {
         if (args.length != 1) {
-            throw new CalculatorException("Incorrect number of arguments for -. Need 0, has " + (args.length - 1));
+            throw new InvalidNumberOfArguments("-", args.length - 1, 0);
         }
         if (executionContext.getStack().size() < 2) {
-            throw new CalculatorException("Not enough element in stack");
+            throw new NotEnoughElementInStack();
         }
         Double first = executionContext.getStack().pop();
         Double second = executionContext.getStack().pop();

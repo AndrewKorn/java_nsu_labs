@@ -1,4 +1,4 @@
-import com.company.CalculatorException;
+import com.company.Exceptions.CalculatorException;
 import com.company.Configuration;
 import com.company.ExecutionContext;
 import com.company.Operation;

@@ -1,4 +1,4 @@
-import com.company.CalculatorException;
+import com.company.Exceptions.CalculatorException;
 import com.company.Configuration;
 import com.company.ExecutionContext;
 import com.company.Operation;
@@ -29,6 +29,15 @@ public class DefineOperationTest {
         ExecutionContext executionContext = new ExecutionContext();
         Operation operation = configuration.getConfig().get("DEFINE");
         String[] args = {"DEFINE" , "a"};
+        assertThrows(CalculatorException.class, () -> operation.execute(args, executionContext));
+    }
+
+    @Test
+    public void testInvalidTypeOfArgument() throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        Configuration configuration = new Configuration("config.properties");
+        ExecutionContext executionContext = new ExecutionContext();
+        Operation operation = configuration.getConfig().get("DEFINE");
+        String[] args = {"DEFINE" , "a", "b"};
         assertThrows(CalculatorException.class, () -> operation.execute(args, executionContext));
     }
 }
