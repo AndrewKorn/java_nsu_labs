@@ -2,6 +2,7 @@ package com.company.Operations;
 
 import com.company.Exceptions.CalculatorException;
 import com.company.Exceptions.InvalidNumberOfArguments;
+import com.company.Exceptions.NotEnoughElementInStack;
 import com.company.Exceptions.StackIsEmpty;
 import com.company.ExecutionContext;
 import com.company.Operation;
@@ -16,6 +17,9 @@ public class SqrtOperation implements Operation {
             throw new StackIsEmpty();
         }
         Double a = executionContext.getStack().pop();
+        if (a < 0) {
+            throw new NotEnoughElementInStack();
+        }
         executionContext.getStack().push(Math.sqrt(a));
     }
 }

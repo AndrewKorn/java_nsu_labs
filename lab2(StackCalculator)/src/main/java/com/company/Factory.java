@@ -1,12 +1,9 @@
 package com.company;
 
 import com.company.Exceptions.CalculatorException;
-import com.company.Exceptions.UnrecognizedOperation;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -21,36 +18,14 @@ public class Factory {
         this.logger = logger;
     }
 
-    void executeOperation(String line) {
-        String[] args = line.split(" ");
-        try {
-            if (!config.containsKey(args[0])) {
-                throw new UnrecognizedOperation(args[0]);
-            }
-            Operation operation = config.get(args[0]);
-            try {
-                operation.execute(args, executionContext);
-                logger.log(Level.INFO, "operation " + args[0] + " was successful");
-            } catch (CalculatorException calculatorException) {
-                logger.log(Level.WARNING, calculatorException.getMessage());
-            }
-        }
-        catch (CalculatorException calculatorException) {
-            calculatorException.printStackTrace();
-            logger.log(Level.WARNING, calculatorException.getMessage());
-        }
-    }
-
     public void calculate(String file) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException, CalculatorException {
         List<String> listOfLines = new FileParser(file).parse();
-
         for (String line : listOfLines) {
             if (line.charAt(0) == '#') {
                 continue;
             }
-            executeOperation(line);
+            OperationExecutor.executeOperation(line, config, executionContext, logger);
         }
-
     }
 
     public void calculate() throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException, CalculatorException {
@@ -60,7 +35,7 @@ public class Factory {
             if (line.charAt(0) == '#') {
                 continue;
             }
-            executeOperation(line);
+            OperationExecutor.executeOperation(line, config, executionContext, logger);
             line = scanner.nextLine();
         }
     }

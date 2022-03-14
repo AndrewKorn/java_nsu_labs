@@ -39,4 +39,14 @@ public class SqrtOperationTest {
         String[] args = {"SQRT", "9"};
         assertThrows(CalculatorException.class, () -> operation.execute(args, executionContext));
     }
+
+    @Test
+    public void testSqrtOfNegativeNumber() throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        Configuration configuration = new Configuration("config.properties");
+        ExecutionContext executionContext = new ExecutionContext();
+        executionContext.getStack().push(-1.0);
+        Operation operation = configuration.getConfig().get("SQRT");
+        String[] args = {"SQRT"};
+        assertThrows(CalculatorException.class, () -> operation.execute(args, executionContext));
+    }
 }
