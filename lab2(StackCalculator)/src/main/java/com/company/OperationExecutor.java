@@ -8,8 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OperationExecutor {
-    static void executeOperation(String line, Map<String, Operation> config, ExecutionContext executionContext, Logger logger) {
-        String[] args = line.split(" ");
+    static void executeOperation(String[] args, Map<String, Operation> config, ExecutionContext executionContext, Logger logger) {
         try {
             if (!config.containsKey(args[0])) {
                 throw new UnrecognizedOperation(args[0]);

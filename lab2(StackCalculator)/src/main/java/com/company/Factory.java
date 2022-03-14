@@ -24,7 +24,8 @@ public class Factory {
             if (line.charAt(0) == '#') {
                 continue;
             }
-            OperationExecutor.executeOperation(line, config, executionContext, logger);
+            String[] args = line.split(" ");
+            OperationExecutor.executeOperation(args, config, executionContext, logger);
         }
     }
 
@@ -35,7 +36,8 @@ public class Factory {
             if (line.charAt(0) == '#') {
                 continue;
             }
-            OperationExecutor.executeOperation(line, config, executionContext, logger);
+            String[] args = line.split(" ");
+            OperationExecutor.executeOperation(args, config, executionContext, logger);
             line = scanner.nextLine();
         }
     }
