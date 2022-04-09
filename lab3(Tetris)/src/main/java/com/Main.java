@@ -1,10 +1,14 @@
 package com;
 
+import com.view.GUI;
+
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        GameField gameField = new GameField();
-        Game game = new Game(gameField);
+    public static void main(String[] args) throws IOException {
+        Game game = new Game();
         GUI gui = new GUI(game);
+        gui.setVisible(true);
     }
 }
 

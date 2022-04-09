@@ -1,29 +1,41 @@
 package com;
 
+import com.general.MyFileWriter;
+import com.model.*;
+
+import javax.swing.*;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Game {
     private final GameField gameField;
-    private final Score score = new Score(0);
-    private State state;
-    private final TimerTask timerTask = new TimerTask() {
-        @Override
-        public void run() {
-            if (state.getState() == StateEnum.Run) {
-                gameField.fallFigure();
-                if (!gameField.isPossibleToSpawn()) {
-                    state.setState(StateEnum.End);
-                }
-                increaseScore();
-            }
-        }
-    };
+    private final Score score;
+    private final State state;
+    private final LeaderBoard leaderBoard;
+    Timer timer = new Timer();
 
-    public Game(GameField gameField) {
-        this.gameField = gameField;
+    public Game() throws IOException {
+        gameField = new GameField();
+        score = new Score(0);
+        leaderBoard = new LeaderBoard();
         state = new State(StateEnum.Run);
-        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if (state.getData() == StateEnum.Run) {
+                    gameField.fallFigure();
+                    if (!gameField.isPossibleToSpawn()) {
+                        state.setData(StateEnum.End);
+                        String name = JOptionPane.showInputDialog("Enter your name");
+                        String newRecord = name + "=" + score.getData() + "\n";
+                        new MyFileWriter("src/main/resources/leaderboard.properties").writeFile(newRecord);
+                        leaderBoard.getProperties().setProperty(name, score.toString());
+                    }
+                    increaseScore();
+                }
+            }
+        };
         timer.schedule(timerTask, 0, 500);
     }
 
@@ -45,13 +57,17 @@ public class Game {
         }
     }
 
+    public LeaderBoard getLeaderBoard() {
+        return leaderBoard;
+    }
+
     public State getState() {
         return state;
     }
 
     public void restart() {
         gameField.clear();
-        score.setScore(0);
-        state = new State(StateEnum.Run);
+        score.setData(0);
+        state.setData(StateEnum.Run);
     }
 }
