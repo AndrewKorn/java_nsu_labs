@@ -15,6 +15,7 @@ public class State extends ConcretePublisher {
 
     public void setData(StateEnum state) {
         this.state = state;
+        notifySubscriber();
     }
 
     public void switchState() {

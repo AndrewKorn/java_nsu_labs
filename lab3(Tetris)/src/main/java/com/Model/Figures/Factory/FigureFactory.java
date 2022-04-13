@@ -1,21 +1,14 @@
 package com.Model.Figures.Factory;
-
 import com.Model.Figures.Figure;
 import com.Model.Figures.FiguresLetter;
-
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 public class FigureFactory {
-    public Figure createFigure(FiguresLetter figuresLetter) {
-        return switch (figuresLetter) {
-            case IFigure -> new IFigureCreator().createFigure();
-            case JFigure -> new JFigureCreator().createFigure();
-            case LFigure -> new LFigureCreator().createFigure();
-            case OFigure -> new OFigureCreator().createFigure();
-            case SFigure -> new SFigureCreator().createFigure();
-            case TFigure -> new TFigureCreator().createFigure();
-            case ZFigure -> new ZFigureCreator().createFigure();
-        };
+    public Figure createFigure(FiguresLetter figuresLetter) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        String creatorName = getClass().getPackageName()  + "." + figuresLetter + "Creator";
+        FigureCreator figureCreator = (FigureCreator)Class.forName(creatorName).getDeclaredConstructor().newInstance();
+        return figureCreator.createFigure();
     }
 
     private FiguresLetter getRandomFigureLetter() {
@@ -24,7 +17,7 @@ public class FigureFactory {
         return figuresLetters[random.nextInt(figuresLetters.length)];
     }
 
-    public Figure createRandomFigure() {
+    public Figure createRandomFigure() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         FiguresLetter figuresLetter = getRandomFigureLetter();
         Figure figure = createFigure(figuresLetter);
         figure.set(4, 19);

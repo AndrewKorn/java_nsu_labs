@@ -4,11 +4,13 @@ import com.General.ConcretePublisher;
 import com.Model.Figures.Factory.FigureFactory;
 import com.Model.Figures.Figure;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class GameField extends ConcretePublisher {
     private final BlocksField blocksField;
     private Figure currentFigure;
 
-    public GameField() {
+    public GameField() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         blocksField = new BlocksField(10, 20);
         currentFigure = new FigureFactory().createRandomFigure();
     }
@@ -52,13 +54,13 @@ public class GameField extends ConcretePublisher {
         notifySubscriber();
     }
 
-    public void spawnNewFigure() {
+    public void spawnNewFigure() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         blocksField.addFigure(currentFigure);
         currentFigure = new FigureFactory().createRandomFigure();
         notifySubscriber();
     }
 
-    public boolean isPossibleToSpawn() {
+    public boolean isPossibleToSpawn() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Figure prevFigure = currentFigure;
         currentFigure = new FigureFactory().createRandomFigure();
         if (!isFalling()) {
@@ -68,7 +70,7 @@ public class GameField extends ConcretePublisher {
         return true;
     }
 
-    public void fallFigure() {
+    public void fallFigure() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         if (isFalling()) {
             currentFigure.shift(0, -1);
         }
@@ -87,10 +89,6 @@ public class GameField extends ConcretePublisher {
 
     public BlocksField getBlocksField() {
         return blocksField;
-    }
-
-    public Figure getCurrentFigure() {
-        return currentFigure;
     }
 
     public int clearFilledRows() {
@@ -116,7 +114,7 @@ public class GameField extends ConcretePublisher {
         return removed;
     }
 
-    public void clear() {
+    public void clear() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         spawnNewFigure();
         blocksField.clear();
         notifySubscriber();

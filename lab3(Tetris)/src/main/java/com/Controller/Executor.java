@@ -25,14 +25,14 @@ public class Executor {
         }
     }
 
-    public void execute(String commandName) {
+    public void execute(String commandName) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         Command command = commandMap.get(commandName);
         if (command != null) {
             command.execute();
         }
     }
 
-    public void execute(Command command) {
+    public void execute(Command command) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         command.execute();
     }
 }

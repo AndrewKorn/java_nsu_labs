@@ -9,7 +9,7 @@ import com.Game;
 
 import javax.swing.*;
 
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import java.lang.reflect.InvocationTargetException;
 
 public class Menu extends JMenu {
 
@@ -19,15 +19,38 @@ public class Menu extends JMenu {
         JMenuItem newGame = new JMenuItem("New Game");
         JMenuItem highScores = new JMenuItem("High scores");
         JMenuItem exit = new JMenuItem("Exit");
-
         this.add(about);
         this.add(newGame);
         this.add(highScores);
         this.add(exit);
 
-        about.addActionListener(e -> executor.execute(new AboutCommand(game)));
-        highScores.addActionListener(e -> executor.execute(new HighScoreCommand(game)));
-        newGame.addActionListener(e -> executor.execute(new RestartCommand(game)));
-        exit.addActionListener(e -> executor.execute(new ExitCommand()));
+        about.addActionListener(e -> {
+            try {
+                executor.execute(new AboutCommand(game));
+            } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+        });
+        highScores.addActionListener(e -> {
+            try {
+                executor.execute(new HighScoreCommand(game));
+            } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+        });
+        newGame.addActionListener(e -> {
+            try {
+                executor.execute(new RestartCommand(game));
+            } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+        });
+        exit.addActionListener(e -> {
+            try {
+                executor.execute(new ExitCommand());
+            } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
 }
