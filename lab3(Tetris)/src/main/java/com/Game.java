@@ -1,9 +1,9 @@
 package com;
 
-import com.general.MyFileWriter;
-import com.model.*;
+import com.Controller.Executor;
+import com.Model.*;
+import com.View.LeaderBoardAdder;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +20,7 @@ public class Game {
         score = new Score(0);
         leaderBoard = new LeaderBoard();
         state = new State(StateEnum.Run);
+
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -27,16 +28,14 @@ public class Game {
                     gameField.fallFigure();
                     if (!gameField.isPossibleToSpawn()) {
                         state.setData(StateEnum.End);
-                        String name = JOptionPane.showInputDialog("Enter your name");
-                        String newRecord = name + "=" + score.getData() + "\n";
-                        new MyFileWriter("src/main/resources/leaderboard.properties").writeFile(newRecord);
-                        leaderBoard.getProperties().setProperty(name, score.toString());
+                        LeaderBoardAdder leaderBoardAdder = new LeaderBoardAdder();
+                        leaderBoardAdder.addToLeaderBoard(leaderBoard, score);
                     }
                     increaseScore();
                 }
             }
         };
-        timer.schedule(timerTask, 0, 500);
+        timer.schedule(timerTask, 0L, 500);
     }
 
     public GameField getGameField() {
