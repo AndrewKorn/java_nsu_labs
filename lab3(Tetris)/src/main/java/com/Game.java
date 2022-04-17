@@ -1,9 +1,6 @@
 package com;
 import com.Model.*;
 import com.View.LeaderBoardAdder;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +11,7 @@ public class Game {
     private final LeaderBoard leaderBoard;
     Timer timer = new Timer();
 
-    public Game() throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Game() {
         gameField = new GameField();
         score = new Score(0);
         leaderBoard = new LeaderBoard();
@@ -24,19 +21,11 @@ public class Game {
             @Override
             public void run() {
                 if (state.getData() == StateEnum.Run) {
-                    try {
-                        gameField.fallFigure();
-                    } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        if (!gameField.isPossibleToSpawn()) {
-                            state.setData(StateEnum.End);
-                            LeaderBoardAdder leaderBoardAdder = new LeaderBoardAdder();
-                            leaderBoardAdder.addToLeaderBoard(leaderBoard, score);
-                        }
-                    } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-                        e.printStackTrace();
+                    gameField.fallFigure();
+                    if (!gameField.isPossibleToSpawn()) {
+                        state.setData(StateEnum.End);
+                        LeaderBoardAdder leaderBoardAdder = new LeaderBoardAdder();
+                        leaderBoardAdder.addToLeaderBoard(leaderBoard, score);
                     }
                     increaseScore();
                 }
@@ -71,7 +60,7 @@ public class Game {
         return state;
     }
 
-    public void restart() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void restart() {
         gameField.clear();
         score.setData(0);
         state.setData(StateEnum.Run);

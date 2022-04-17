@@ -1,10 +1,11 @@
 package com.Model.Figures.Factory;
 
 import com.Model.Block;
-import com.Model.ColorEnum;
 import com.Model.Figures.ConcreteFigure;
 import com.Model.Figures.Figure;
 import com.Model.Point;
+
+import java.awt.*;
 
 public class IFigureCreator implements FigureCreator {
     @Override
@@ -16,6 +17,6 @@ public class IFigureCreator implements FigureCreator {
                 new Block(2, 0),
                 new Block(3, 0)
         };
-        return new ConcreteFigure(centre, blocks, ColorEnum.LightBlue);
+        return new ConcreteFigure(centre, blocks, Color.CYAN);
     }
 }

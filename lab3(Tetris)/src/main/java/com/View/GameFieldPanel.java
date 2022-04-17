@@ -2,7 +2,6 @@ package com.View;
 
 import com.General.Subscriber;
 import com.Model.BlocksField;
-import com.Model.ColorEnum;
 import com.Model.GameField;
 
 import javax.swing.*;
@@ -37,29 +36,8 @@ public class GameFieldPanel extends JPanel implements Subscriber {
         BlocksField field = gameField.getFieldWithFigure();
         for (int i = 0; i < 20; ++i) {
             for (int j = 0; j < 10; ++j) {
-                if (field.getField()[i][j] == ColorEnum.Empty && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.WHITE);
-                }
-                else if (field.getField()[i][j] == ColorEnum.Blue && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.BLUE);
-                }
-                else if (field.getField()[i][j] == ColorEnum.LightBlue && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.CYAN);
-                }
-                else if (field.getField()[i][j] == ColorEnum.Orange && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.ORANGE);
-                }
-                else if (field.getField()[i][j] == ColorEnum.Yellow && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.YELLOW);
-                }
-                else if (field.getField()[i][j] == ColorEnum.Red && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.RED);
-                }
-                else if (field.getField()[i][j] == ColorEnum.Green && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.GREEN);
-                }
-                else if (field.getField()[i][j] == ColorEnum.Purple && grids[i][j] != null) {
-                    grids[i][j].setBackground(Color.MAGENTA);
+                if (grids[i][j] != null) {
+                    grids[i][j].setBackground(field.getField()[i][j]);
                 }
             }
         }

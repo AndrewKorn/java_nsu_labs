@@ -13,26 +13,37 @@ import java.util.Properties;
 public class Executor {
     private final HashMap<String, Command> commandMap = new HashMap<>();
 
-    public Executor(Game game) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        InputStream is = Main.class.getClassLoader().getResourceAsStream("commands.properties");
-        Properties properties = new Properties();
-        properties.load(is);
+    public Executor(Game game) {
 
-        for (String key : properties.stringPropertyNames()) {
-            String commandName = properties.getProperty(key);
-            Command operation = (Command) Class.forName(commandName).getDeclaredConstructor(Game.class).newInstance(game);
-            commandMap.put(key, operation);
+        try {
+            InputStream is = Main.class.getClassLoader().getResourceAsStream("commands.properties");
+            Properties properties = new Properties();
+            properties.load(is);
+
+            for (String key : properties.stringPropertyNames()) {
+                String commandName = properties.getProperty(key);
+                Command operation = (Command) Class.forName(commandName).getDeclaredConstructor(Game.class).newInstance(game);
+                commandMap.put(key, operation);
+            }
         }
+        catch (
+                IOException |
+                ClassNotFoundException |
+                NoSuchMethodException |
+                InvocationTargetException |
+                InstantiationException |
+                IllegalAccessException e
+        ) {e.printStackTrace();}
     }
 
-    public void execute(String commandName) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void execute(String commandName) {
         Command command = commandMap.get(commandName);
         if (command != null) {
             command.execute();
         }
     }
 
-    public void execute(Command command) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void execute(Command command) {
         command.execute();
     }
 }

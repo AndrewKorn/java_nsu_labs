@@ -5,7 +5,7 @@ import com.Controller.Executor;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.lang.reflect.InvocationTargetException;
+
 
 public class KeyboardListener implements KeyListener {
     private final Executor executor;
@@ -17,11 +17,7 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        try {
-            executor.execute(String.valueOf(e.getKeyChar()));
-        } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException ex) {
-            ex.printStackTrace();
-        }
+        executor.execute(String.valueOf(e.getKeyChar()));
     }
 
     @Override

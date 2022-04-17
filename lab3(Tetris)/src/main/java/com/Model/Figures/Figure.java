@@ -1,7 +1,8 @@
 package com.Model.Figures;
 
 import com.Model.Block;
-import com.Model.ColorEnum;
+
+import java.awt.*;
 
 
 public interface Figure {
@@ -9,6 +10,6 @@ public interface Figure {
     void rotateCounterclockwise();
     void shift(int xShift, int yShift);
     Block[] getBlocks();
-    ColorEnum getColor();
+    Color getColor();
     void set(int x, int y);
 }

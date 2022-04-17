@@ -1,10 +1,12 @@
 package com.Model.Figures.Factory;
 
 import com.Model.Block;
-import com.Model.ColorEnum;
 import com.Model.Figures.ConcreteFigure;
 import com.Model.Figures.Figure;
 import com.Model.Point;
+
+import javax.xml.crypto.KeySelector;
+import java.awt.*;
 
 public class TFigureCreator implements FigureCreator {
     @Override
@@ -16,6 +18,6 @@ public class TFigureCreator implements FigureCreator {
                 new Block(1, 1),
                 new Block(2, 0)
         };
-        return new ConcreteFigure(centre, blocks, ColorEnum.Purple);
+        return new ConcreteFigure(centre, blocks, Color.MAGENTA);
     }
 }

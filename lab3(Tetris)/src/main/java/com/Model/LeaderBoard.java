@@ -7,9 +7,14 @@ import java.util.Properties;
 public class LeaderBoard {
     private final Properties properties = new Properties();
 
-    public LeaderBoard() throws IOException {
-        InputStream is = LeaderBoard.class.getClassLoader().getResourceAsStream("leaderboard.properties");
-        properties.load(is);
+    public LeaderBoard() {
+        try {
+            InputStream is = LeaderBoard.class.getClassLoader().getResourceAsStream("leaderboard.properties");
+            properties.load(is);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Properties getProperties() {

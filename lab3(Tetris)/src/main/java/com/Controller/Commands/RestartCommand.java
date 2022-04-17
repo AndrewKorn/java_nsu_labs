@@ -2,8 +2,6 @@ package com.Controller.Commands;
 
 import com.Game;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class RestartCommand implements Command {
     private final Game game;
 
@@ -12,7 +10,7 @@ public class RestartCommand implements Command {
     }
 
     @Override
-    public void execute() throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void execute() {
         game.restart();
     }
 }

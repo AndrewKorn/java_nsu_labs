@@ -1,21 +1,22 @@
 package com.Model.Figures;
 
 import com.Model.Block;
-import com.Model.ColorEnum;
 import com.Model.Point;
+
+import java.awt.*;
 
 public class ConcreteFigure implements Figure {
     private final Point centre;
     private final Block[] blocks;
-    private final ColorEnum color;
+    private final Color color;
 
-    public ConcreteFigure(Point centre, Block[] blocks, ColorEnum color) {
+    public ConcreteFigure(Point centre, Block[] blocks, Color color) {
         this.centre = centre;
         this.blocks = blocks;
         this.color = color;
     }
 
-    public ColorEnum getColor() {
+    public Color getColor() {
         return color;
     }
 

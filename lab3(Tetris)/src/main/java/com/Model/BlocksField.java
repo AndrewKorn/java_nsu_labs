@@ -2,18 +2,20 @@ package com.Model;
 
 import com.Model.Figures.Figure;
 
+import java.awt.*;
+
 public class BlocksField {
     int width;
     int height;
-    private final ColorEnum[][] field;
+    private final Color[][] field;
 
     public BlocksField(int width, int height) {
         this.width = width;
         this.height = height;
-        field = new ColorEnum[height][width];
+        field = new Color[height][width];
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
-                field[i][j] = ColorEnum.Empty;
+                field[i][j] = Color.WHITE;
             }
         }
     }
@@ -39,7 +41,7 @@ public class BlocksField {
 
     public boolean isRowFull(int y) {
         for (int i = 0; i < width; ++i) {
-            if (field[height - 1 - y][i] == ColorEnum.Empty) {
+            if (field[height - 1 - y][i] == Color.WHITE) {
                 return false;
             }
         }
@@ -49,7 +51,7 @@ public class BlocksField {
     public void clear() {
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {
-                field[i][j] = ColorEnum.Empty;
+                field[i][j] = Color.WHITE;
             }
         }
     }
@@ -64,15 +66,7 @@ public class BlocksField {
         System.out.println();
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public ColorEnum[][] getField() {
+    public Color[][] getField() {
         return field;
     }
 }
