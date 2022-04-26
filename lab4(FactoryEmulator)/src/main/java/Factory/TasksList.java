@@ -2,6 +2,7 @@ package Factory;
 
 import Factory.Factories.AllFactories;
 import Factory.General.Configuration;
+import Factory.Warehouses.AllProductsCounters;
 import Factory.Workers.Suppliers.AccessorySupplier;
 import Factory.Workers.Suppliers.BodySupplier;
 import Factory.Workers.Suppliers.MotorSupplier;
@@ -15,15 +16,17 @@ import java.util.ArrayList;
 public class TasksList {
     private final ArrayList<Task> tasks = new ArrayList<>();
 
-    public TasksList(Configuration configuration, AllFactories allFactories, AllWarehouses allWarehouses) {
-        tasks.add(new BodySupplier(allWarehouses.getBodyWarehouse(), allFactories.getBodyFactory(), 100));
-        tasks.add(new MotorSupplier(allWarehouses.getMotorWarehouse(), allFactories.getMotorFactory(), 500));
+    public TasksList(Configuration configuration, AllFactories allFactories, AllWarehouses allWarehouses, AllProductsCounters productsCounters) {
+        tasks.add(new BodySupplier(allWarehouses.getBodyWarehouse(), allFactories.getBodyFactory(), productsCounters.getReleasedBodyCounter(), 100));
+        tasks.add(new MotorSupplier(allWarehouses.getMotorWarehouse(), allFactories.getMotorFactory(), productsCounters.getReleasedMotorCounter(), 500));
 
         for (int i = 0; i < configuration.getAccessorySuppliersCount(); ++i) {
             tasks.add(new AccessorySupplier(
                     allWarehouses.getAccessoryWarehouse(),
                     allFactories.getAccessoryFactory(),
-                    1000)
+                    productsCounters.getReleasedAccessoryCounter(),
+                    1000
+                    )
             );
         }
 
@@ -34,7 +37,9 @@ public class TasksList {
                     allWarehouses.getMotorWarehouse(),
                     allWarehouses.getAccessoryWarehouse(),
                     allFactories.getCarBuilder(),
-                    allWarehouses.getCarWarehouse())
+                    allWarehouses.getCarWarehouse(),
+                    productsCounters.getReleasedCarCounter()
+                    )
             );
         }
 
@@ -42,7 +47,9 @@ public class TasksList {
             tasks.add(new Dealer(
                     "Dealer" + i,
                     allWarehouses.getCarWarehouse(),
-                    10000)
+                    productsCounters.getCarsSoldCounter(),
+                    10000
+                    )
             );
         }
     }

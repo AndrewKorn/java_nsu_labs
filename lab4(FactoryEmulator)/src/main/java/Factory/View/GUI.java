@@ -1,17 +1,18 @@
 package Factory.View;
 
+import Factory.Warehouses.AllProductsCounters;
 import Factory.Warehouses.AllWarehouses;
 import javax.swing.*;
 
 public class GUI extends JFrame {
-    public  GUI(AllWarehouses allWarehouses) {
+    public  GUI(AllWarehouses allWarehouses, AllProductsCounters productsCounters) {
         super("Car factory emulator");
 
         SlidersPanel slidersPanel = new SlidersPanel();
 
-
-        InfoPanel infoPanel = new InfoPanel(allWarehouses);
+        InfoPanel infoPanel = new InfoPanel(allWarehouses, productsCounters);
         allWarehouses.addSubscriber(infoPanel);
+        productsCounters.addSubscriber(infoPanel);
 
         this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         getContentPane().add(slidersPanel);

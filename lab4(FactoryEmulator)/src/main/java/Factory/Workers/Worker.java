@@ -5,10 +5,7 @@ import Factory.Products.Accessory;
 import Factory.Products.Body;
 import Factory.Products.Car;
 import Factory.Products.Motor;
-import Factory.Warehouses.AccessoryWarehouse;
-import Factory.Warehouses.BodyWarehouse;
-import Factory.Warehouses.CarWarehouse;
-import Factory.Warehouses.MotorWarehouse;
+import Factory.Warehouses.*;
 import ThreadPool.Task;
 
 public class Worker implements Task {
@@ -18,6 +15,7 @@ public class Worker implements Task {
     private final AccessoryWarehouse accessoryWarehouse;
     private final CarBuilder carBuilder;
     private final CarWarehouse carWarehouse;
+    private final ProductsCounter<Car> productsCounter;
 
     public Worker(
             String name,
@@ -25,7 +23,8 @@ public class Worker implements Task {
             MotorWarehouse motorWarehouse,
             AccessoryWarehouse accessoryWarehouse,
             CarBuilder carBuilder,
-            CarWarehouse carWarehouse
+            CarWarehouse carWarehouse,
+            ProductsCounter<Car> productsCounter
     ) {
         this.name = name;
         this.bodyWarehouse = bodyWarehouse;
@@ -33,6 +32,7 @@ public class Worker implements Task {
         this.accessoryWarehouse = accessoryWarehouse;
         this.carBuilder = carBuilder;
         this.carWarehouse = carWarehouse;
+        this.productsCounter = productsCounter;
     }
 
     @Override
@@ -41,13 +41,13 @@ public class Worker implements Task {
     }
 
     @Override
-    public void performWork() throws InterruptedException {
+    public void performWork() {
         while (true) {
             Body body = bodyWarehouse.getProduct();
             Motor motor = motorWarehouse.getProduct();
             Accessory accessory = accessoryWarehouse.getProduct();
-
             Car car = carBuilder.buildCar(body, motor, accessory);
+            productsCounter.increment();
             carWarehouse.putProduct(car);
         }
     }
