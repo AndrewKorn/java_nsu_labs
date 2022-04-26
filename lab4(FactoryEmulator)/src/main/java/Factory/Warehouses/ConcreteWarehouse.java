@@ -1,12 +1,12 @@
 package Factory.Warehouses;
 
+import Factory.General.ConcretePublisher;
 import Factory.Products.ConcreteProduct;
-import com.sun.jdi.event.ThreadStartEvent;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ConcreteWarehouse<T extends ConcreteProduct> implements Warehouse<T> {
+public class ConcreteWarehouse<T extends ConcreteProduct> extends ConcretePublisher implements Warehouse<T> {
     private final int warehouseSize;
     private final Queue<T> queue;
 
@@ -49,6 +49,7 @@ public class ConcreteWarehouse<T extends ConcreteProduct> implements Warehouse<T
         if (!isFull()) {
             queue.add(product);
             notify();
+            notifySubscriber();
         }
         else {
             try {

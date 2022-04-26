@@ -1,4 +1,4 @@
-package Factory;
+package Factory.Workers;
 
 import Factory.Factories.CarBuilder;
 import Factory.Products.Accessory;
@@ -18,8 +18,6 @@ public class Worker implements Task {
     private final AccessoryWarehouse accessoryWarehouse;
     private final CarBuilder carBuilder;
     private final CarWarehouse carWarehouse;
-    private final int waitTime;
-
 
     public Worker(
             String name,
@@ -27,8 +25,7 @@ public class Worker implements Task {
             MotorWarehouse motorWarehouse,
             AccessoryWarehouse accessoryWarehouse,
             CarBuilder carBuilder,
-            CarWarehouse carWarehouse,
-            int waitTime
+            CarWarehouse carWarehouse
     ) {
         this.name = name;
         this.bodyWarehouse = bodyWarehouse;
@@ -36,7 +33,6 @@ public class Worker implements Task {
         this.accessoryWarehouse = accessoryWarehouse;
         this.carBuilder = carBuilder;
         this.carWarehouse = carWarehouse;
-        this.waitTime = waitTime;
     }
 
     @Override
@@ -47,7 +43,6 @@ public class Worker implements Task {
     @Override
     public void performWork() throws InterruptedException {
         while (true) {
-            Thread.sleep(waitTime);
             Body body = bodyWarehouse.getProduct();
             Motor motor = motorWarehouse.getProduct();
             Accessory accessory = accessoryWarehouse.getProduct();

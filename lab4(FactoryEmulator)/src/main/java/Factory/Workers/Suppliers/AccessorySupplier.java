@@ -1,4 +1,4 @@
-package Factory.Suppliers;
+package Factory.Workers.Suppliers;
 
 import Factory.Factories.ProductFactory;
 import Factory.Products.Accessory;

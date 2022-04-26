@@ -1,10 +1,11 @@
-package Factory.Suppliers;
+package Factory.Workers.Suppliers;
 
 import Factory.Factories.ProductFactory;
 import Factory.Products.ConcreteProduct;
 import Factory.Warehouses.ConcreteWarehouse;
+import ThreadPool.Task;
 
-public class Supplier<T extends ConcreteProduct> extends Thread {
+public class Supplier<T extends ConcreteProduct> implements Task {
     private final ConcreteWarehouse<T> warehouse;
     private final ProductFactory<T> factory;
     private final int waitTime;
@@ -16,14 +17,17 @@ public class Supplier<T extends ConcreteProduct> extends Thread {
         this.waitTime = waitTime;
     }
 
-    public void run() {
+    @Override
+    public String getName() {
+        return "Accessory supplier";
+    }
+
+    @Override
+    public void performWork() throws InterruptedException {
         while (true) {
-            try {
-                Thread.sleep(waitTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             warehouse.putProduct(factory.createProduct());
+
+            Thread.sleep(waitTime);
         }
     }
 }
