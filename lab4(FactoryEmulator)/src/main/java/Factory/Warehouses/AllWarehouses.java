@@ -9,17 +9,17 @@ import Factory.Products.Car;
 import Factory.Products.Motor;
 
 public class AllWarehouses extends ConcretePublisher implements Subscriber {
-    private final BodyWarehouse bodyWarehouse;
-    private final MotorWarehouse motorWarehouse;
-    private final AccessoryWarehouse accessoryWarehouse;
-    private final CarWarehouse carWarehouse;
+    private final ConcreteWarehouse<Body> bodyWarehouse;
+    private final ConcreteWarehouse<Motor> motorWarehouse;
+    private final ConcreteWarehouse<Accessory> accessoryWarehouse;
+    private final ConcreteWarehouse<Car> carWarehouse;
 
 
     public AllWarehouses(Configuration configuration) {
-        bodyWarehouse = new BodyWarehouse(configuration.getBodyWarehouseSize());
-        motorWarehouse = new MotorWarehouse(configuration.getMotorWarehouseSize());
-        accessoryWarehouse = new AccessoryWarehouse(configuration.getAccessoryWarehouseSize());
-        carWarehouse = new CarWarehouse(configuration.getCarWarehouseSize());
+        bodyWarehouse = new ConcreteWarehouse<>(configuration.getBodyWarehouseSize());
+        motorWarehouse = new ConcreteWarehouse<>(configuration.getMotorWarehouseSize());
+        accessoryWarehouse = new ConcreteWarehouse<>(configuration.getAccessoryWarehouseSize());
+        carWarehouse = new ConcreteWarehouse<>(configuration.getCarWarehouseSize());
 
         bodyWarehouse.addSubscriber(this);
         motorWarehouse.addSubscriber(this);
@@ -27,19 +27,19 @@ public class AllWarehouses extends ConcretePublisher implements Subscriber {
         carWarehouse.addSubscriber(this);
     }
 
-    public BodyWarehouse getBodyWarehouse() {
+    public ConcreteWarehouse<Body> getBodyWarehouse() {
         return bodyWarehouse;
     }
 
-    public MotorWarehouse getMotorWarehouse() {
+    public ConcreteWarehouse<Motor> getMotorWarehouse() {
         return motorWarehouse;
     }
 
-    public AccessoryWarehouse getAccessoryWarehouse() {
+    public ConcreteWarehouse<Accessory> getAccessoryWarehouse() {
         return accessoryWarehouse;
     }
 
-    public CarWarehouse getCarWarehouse() {
+    public ConcreteWarehouse<Car> getCarWarehouse() {
         return carWarehouse;
     }
 

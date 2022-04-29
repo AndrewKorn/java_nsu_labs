@@ -1,4 +1,4 @@
-package Factory.Warehouses;
+package Factory.ProductsCounters;
 
 import Factory.General.ConcretePublisher;
 import Factory.General.Subscriber;

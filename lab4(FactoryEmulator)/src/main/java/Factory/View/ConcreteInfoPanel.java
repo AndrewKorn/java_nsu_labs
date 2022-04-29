@@ -2,7 +2,7 @@ package Factory.View;
 
 import Factory.General.Subscriber;
 import Factory.Warehouses.ConcreteWarehouse;
-import Factory.Warehouses.ProductsCounter;
+import Factory.ProductsCounters.ProductsCounter;
 
 import javax.swing.*;
 

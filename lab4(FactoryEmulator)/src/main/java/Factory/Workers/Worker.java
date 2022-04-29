@@ -1,29 +1,30 @@
 package Factory.Workers;
 
-import Factory.Factories.CarBuilder;
+import Factory.Factories.CarFactory;
 import Factory.Products.Accessory;
 import Factory.Products.Body;
 import Factory.Products.Car;
 import Factory.Products.Motor;
+import Factory.ProductsCounters.ProductsCounter;
 import Factory.Warehouses.*;
 import ThreadPool.Task;
 
 public class Worker implements Task {
     private final String name;
-    private final BodyWarehouse bodyWarehouse;
-    private final MotorWarehouse motorWarehouse;
-    private final AccessoryWarehouse accessoryWarehouse;
-    private final CarBuilder carBuilder;
-    private final CarWarehouse carWarehouse;
+    private final ConcreteWarehouse<Body> bodyWarehouse;
+    private final ConcreteWarehouse<Motor> motorWarehouse;
+    private final ConcreteWarehouse<Accessory> accessoryWarehouse;
+    private final CarFactory carBuilder;
+    private final ConcreteWarehouse<Car> carWarehouse;
     private final ProductsCounter<Car> productsCounter;
 
     public Worker(
             String name,
-            BodyWarehouse bodyWarehouse,
-            MotorWarehouse motorWarehouse,
-            AccessoryWarehouse accessoryWarehouse,
-            CarBuilder carBuilder,
-            CarWarehouse carWarehouse,
+            ConcreteWarehouse<Body> bodyWarehouse,
+            ConcreteWarehouse<Motor> motorWarehouse,
+            ConcreteWarehouse<Accessory> accessoryWarehouse,
+            CarFactory carBuilder,
+            ConcreteWarehouse<Car> carWarehouse,
             ProductsCounter<Car> productsCounter
     ) {
         this.name = name;

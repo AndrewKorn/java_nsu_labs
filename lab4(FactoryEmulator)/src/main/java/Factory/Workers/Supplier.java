@@ -1,16 +1,16 @@
-package Factory.Workers.Suppliers;
+package Factory.Workers;
 
 import Factory.Factories.ProductFactory;
 import Factory.Products.ConcreteProduct;
 import Factory.Warehouses.ConcreteWarehouse;
-import Factory.Warehouses.ProductsCounter;
+import Factory.ProductsCounters.ProductsCounter;
 import ThreadPool.Task;
 
 public class Supplier<T extends ConcreteProduct> implements Task {
     private final ConcreteWarehouse<T> warehouse;
     private final ProductFactory<T> factory;
     private final ProductsCounter<T> productsCounter;
-    private final int waitTime;
+    private int waitTime;
 
     public Supplier(ConcreteWarehouse<T> warehouse, ProductFactory<T> factory, ProductsCounter<T> productsCounter, int waitTime) {
         super();
@@ -32,5 +32,9 @@ public class Supplier<T extends ConcreteProduct> implements Task {
             productsCounter.increment();
             Thread.sleep(waitTime);
         }
+    }
+
+    public void setWaitTime(int waitTime) {
+        this.waitTime = waitTime;
     }
 }

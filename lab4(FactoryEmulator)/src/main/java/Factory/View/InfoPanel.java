@@ -1,6 +1,6 @@
 package Factory.View;
 
-import Factory.Warehouses.AllProductsCounters;
+import Factory.ProductsCounters.AllProductsCounters;
 import Factory.Warehouses.AllWarehouses;
 import Factory.General.Subscriber;
 
@@ -22,7 +22,6 @@ public class InfoPanel extends JPanel implements Subscriber {
         carInfoPanel = new ConcreteInfoPanel("Car", allWarehouses.getCarWarehouse(), productsCounters.getReleasedCarCounter());
         dealerInfoPanel = new DealerInfoPanel(productsCounters.getCarsSoldCounter());
 
-        //this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(bodyInfoPanel);
         this.add(motorInfoPanel);
         this.add(accessoryInfoPanel);
