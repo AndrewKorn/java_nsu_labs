@@ -1,3 +1,4 @@
+import Factory.General.FactoryLogger;
 import Factory.Workers.AccessorySuppliers;
 import Factory.Workers.Dealers;
 import Factory.Factories.AllFactories;
@@ -16,6 +17,7 @@ import ThreadPool.Task;
 public class Main {
     public static void main(String[] args) {
         Configuration configuration = new Configuration();
+        FactoryLogger logger = new FactoryLogger();
         AllFactories allFactories = new AllFactories();
         AllProductsCounters productsCounters = new AllProductsCounters();
         AllWarehouses allWarehouses = new AllWarehouses(configuration);
@@ -35,11 +37,11 @@ public class Main {
         );
 
         AccessorySuppliers accessorySuppliers = new AccessorySuppliers(configuration.getAccessorySuppliersCount(), allWarehouses, allFactories, productsCounters);
-        Dealers dealers = new Dealers(configuration.getDealersCount(), allWarehouses, allFactories, productsCounters);
+        Dealers dealers = new Dealers(configuration.getDealersCount(), allWarehouses, productsCounters, logger);
         Workers workers = new Workers(configuration.getWorkersCount(), allWarehouses, allFactories, productsCounters);
         TasksList tasksList = new TasksList(bodySupplier, motorSupplier, accessorySuppliers, dealers, workers);
 
-        ThreadPool threadPool = new ThreadPool(configuration.getAllWorkersCount());
+        ThreadPool threadPool = new ThreadPool(configuration.getAllWorkersCount(), logger);
         for (Task task : tasksList.getTasks()) {
             threadPool.addTask(task);
         }

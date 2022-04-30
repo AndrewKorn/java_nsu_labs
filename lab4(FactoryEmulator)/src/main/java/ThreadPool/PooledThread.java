@@ -1,28 +1,24 @@
 package ThreadPool;
 
+import Factory.General.FactoryLogger;
+
 import java.util.List;
+import java.util.logging.Level;
 
 public class PooledThread extends Thread {
-    private final List<ThreadPoolTask> taskQueue;
+    private final List<Task> taskQueue;
+    private final FactoryLogger logger;
 
-    public PooledThread(String name, List<ThreadPoolTask> taskQueue) {
+
+    public PooledThread(String name, List<Task> taskQueue, FactoryLogger logger) {
         super(name);
         this.taskQueue = taskQueue;
+        this.logger = logger;
     }
 
-    private void performTask(ThreadPoolTask task) {
-        task.prepare();
-        try {
-            task.go();
-        }
-        catch (InterruptedException e) {
-            task.interrupted();
-        }
-        task.finish();
-    }
 
     public void run() {
-        ThreadPoolTask toExecute;
+        Task toExecute;
         while (true) {
             synchronized (taskQueue) {
                 if (taskQueue.isEmpty()) {
@@ -30,7 +26,7 @@ public class PooledThread extends Thread {
                         taskQueue.wait();
                     }
                     catch (InterruptedException e) {
-                        System.err.println("Thread was interrupted:"+getName());
+                        logger.getExceptionMessage(Level.WARNING, e);
                     }
                     continue;
                 }
@@ -38,8 +34,11 @@ public class PooledThread extends Thread {
                     toExecute = taskQueue.remove(0);
                 }
             }
-            System.out.println(getName() + " got the job: " + toExecute.getName());
-            performTask(toExecute);
+            try {
+                toExecute.performWork();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

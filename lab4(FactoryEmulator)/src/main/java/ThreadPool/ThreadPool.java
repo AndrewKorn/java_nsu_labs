@@ -1,41 +1,23 @@
 package ThreadPool;
 
+import Factory.General.FactoryLogger;
+
 import java.util.*;
 
-public class ThreadPool implements TaskListener {
-    private final List<ThreadPoolTask> taskQueue = new LinkedList<>();
+public class ThreadPool{
+    private final List<Task> taskQueue = new LinkedList<>();
 
-    @Override
-    public void taskStarted(Task task)
-    {
-        System.out.println("Started:" + task.getName());
-    }
-    @Override
-    public void taskFinished(Task task)
-    {
-        System.out.println("Finished:" + task.getName());
-    }
-    @Override
-    public void taskInterrupted(Task task)
-    {
-        System.out.println("Interrupted:" + task.getName());
-    }
-
-    public void addTask(Task task, TaskListener taskListener) {
+    public void addTask(Task task) {
         synchronized (taskQueue) {
-            taskQueue.add(new ThreadPoolTask(task, taskListener));
+            taskQueue.add(task);
             taskQueue.notify();
         }
     }
 
-    public void addTask(Task task) {
-        addTask(task, this);
-    }
-
-    public ThreadPool(int threadsCount) {
+    public ThreadPool(int threadsCount, FactoryLogger logger) {
         Set<PooledThread> availableThreads = new HashSet<>();
         for (int i = 0; i < threadsCount; ++i) {
-            availableThreads.add(new PooledThread("Performer " + i, taskQueue));
+            availableThreads.add(new PooledThread("Performer " + i, taskQueue, logger));
         }
         for (PooledThread availableThread : availableThreads) {
             availableThread.start();

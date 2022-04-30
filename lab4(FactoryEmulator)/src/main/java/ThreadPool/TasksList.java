@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class TasksList {
     private final ArrayList<Task> tasks = new ArrayList<>();
 
-
     public TasksList(
                      Supplier<Body> bodySupplier,
                      Supplier<Motor> motorSupplier,
