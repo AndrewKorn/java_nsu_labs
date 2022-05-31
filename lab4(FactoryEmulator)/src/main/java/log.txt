@@ -1,26 +1,10 @@
-апр. 30, 2022 9:29:45 AM Factory.General.FactoryLogger getInfoMessage
+мая 23, 2022 5:30:48 PM Factory.General.FactoryLogger getInfoMessage
 INFO: Operation performed: Dealer0: Car<0> (Body:<0>, Motor:<0>, Accessory:<0>)
-апр. 30, 2022 9:29:46 AM Factory.General.FactoryLogger getInfoMessage
+мая 23, 2022 5:30:49 PM Factory.General.FactoryLogger getInfoMessage
 INFO: Operation performed: Dealer0: Car<1> (Body:<1>, Motor:<1>, Accessory:<1>)
-апр. 30, 2022 9:29:47 AM Factory.General.FactoryLogger getInfoMessage
+мая 23, 2022 5:30:50 PM Factory.General.FactoryLogger getInfoMessage
 INFO: Operation performed: Dealer0: Car<2> (Body:<2>, Motor:<2>, Accessory:<2>)
-апр. 30, 2022 9:29:48 AM Factory.General.FactoryLogger getInfoMessage
+мая 23, 2022 5:30:51 PM Factory.General.FactoryLogger getInfoMessage
 INFO: Operation performed: Dealer0: Car<3> (Body:<3>, Motor:<3>, Accessory:<3>)
-апр. 30, 2022 9:29:49 AM Factory.General.FactoryLogger getInfoMessage
+мая 23, 2022 5:30:52 PM Factory.General.FactoryLogger getInfoMessage
 INFO: Operation performed: Dealer0: Car<4> (Body:<4>, Motor:<4>, Accessory:<4>)
-апр. 30, 2022 9:29:50 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<5> (Body:<5>, Motor:<5>, Accessory:<5>)
-апр. 30, 2022 9:29:51 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<6> (Body:<6>, Motor:<6>, Accessory:<8>)
-апр. 30, 2022 9:29:52 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<7> (Body:<7>, Motor:<7>, Accessory:<7>)
-апр. 30, 2022 9:29:53 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<8> (Body:<8>, Motor:<8>, Accessory:<6>)
-апр. 30, 2022 9:29:54 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<9> (Body:<9>, Motor:<9>, Accessory:<9>)
-апр. 30, 2022 9:29:55 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<10> (Body:<10>, Motor:<10>, Accessory:<10>)
-апр. 30, 2022 9:29:56 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<11> (Body:<11>, Motor:<11>, Accessory:<11>)
-апр. 30, 2022 9:29:57 AM Factory.General.FactoryLogger getInfoMessage
-INFO: Operation performed: Dealer0: Car<12> (Body:<12>, Motor:<12>, Accessory:<12>)

@@ -1,0 +1,8 @@
+мая 31, 2022 8:46:32 PM ServerLogger getInfoMessage
+INFO: Operation performed: Server started
+мая 31, 2022 8:46:34 PM ServerLogger getInfoMessage
+INFO: Operation performed: New client connected 
+мая 31, 2022 8:46:34 PM ServerLogger getInfoMessage
+INFO: Operation performed: Now connected 1 clients
+мая 31, 2022 8:47:06 PM ServerLogger getInfoMessage
+INFO: Operation performed: asdf was disconnected for inactivity
