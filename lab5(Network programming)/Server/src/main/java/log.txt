@@ -1,8 +1,0 @@
-июн. 04, 2022 1:22:57 PM ServerLogger getInfoMessage
-INFO: Operation performed: Server started
-июн. 04, 2022 1:23:01 PM ServerLogger getInfoMessage
-INFO: Operation performed: New client connected 
-июн. 04, 2022 1:23:01 PM ServerLogger getInfoMessage
-INFO: Operation performed: Now connected 1 clients
-июн. 04, 2022 1:23:06 PM ServerLogger getInfoMessage
-INFO: Operation performed: asd exited the chat
